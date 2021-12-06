@@ -1,0 +1,10 @@
+<div class="list-image">
+  <img *ngIf="listImage && !croppedImage" [src]="webUrl+listImage" class="img-fluid">
+  <img *ngIf="croppedImage" [src]="croppedImage" class="img-fluid">
+  <div *ngIf="!listImage && !croppedImage" class="image-blank w-100"></div>
+  <ng-container *ngIf="labelColor && district">
+    <div class="district-label p-2 fs-5 fw-bolder" [ngStyle]="{backgroundColor: labelColor}">
+      {{district}}
+    </div>
+  </ng-container>
+</div>

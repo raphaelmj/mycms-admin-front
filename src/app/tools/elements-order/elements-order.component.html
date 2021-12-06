@@ -1,0 +1,15 @@
+<h1 *ngIf="header">
+  {{header}}
+</h1>
+<div class="row" id="sort">
+  <ng-container *ngFor="let el of elements">
+    <div class="border border-secondary mb-2" [ngClass]="columnsClasses">
+      <img [src]="webUrl+el[imagePathKey]" *ngIf="imagePathKey && hasImage && el[imagePathKey]" class="img-fluid">
+      <h2 class="text-primary">{{el[nameKey]}}</h2>
+      <ng-container *ngIf="customKey">
+        <h4>{{el[customKey]}}</h4>
+      </ng-container>
+    </div>
+  </ng-container>
+
+</div>

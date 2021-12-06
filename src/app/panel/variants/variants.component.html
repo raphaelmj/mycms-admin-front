@@ -1,0 +1,38 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <button mat-raised-button color="primary" type="button" (click)="addNew()">
+      <mat-icon>add</mat-icon> Dodaj
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 mb-2" *ngFor="let variant of variants;let i = index">
+    <div class="border p-2">
+      <h2>{{variant.name}}</h2>
+      <div class="text-primary">
+        {{variant.path}}
+      </div>
+      <div class="flex mb-2" *ngIf="variant.page">
+        <span class="badge bg-success">Strona:</span> {{variant.page?.title}}
+      </div>
+      <button mat-raised-button color="primary" type="button" (click)="openEdit(variant)">
+        <mat-icon>
+          edit
+        </mat-icon>
+      </button>
+      <ng-container *ngIf="variant.investitions.length > 0">
+        <button mat-raised-button color="primary" (click)="changeInvestitionsOrder(variant,i)" class="ms-1">
+          <mat-icon>
+            reorder
+          </mat-icon> Kolejność inwestycji
+        </button>
+      </ng-container>
+      <button mat-raised-button color="warn" type="button" class="ms-1" (click)="deleteStart(variant)">
+        <mat-icon>
+          delete
+        </mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<ng-template #temp></ng-template>

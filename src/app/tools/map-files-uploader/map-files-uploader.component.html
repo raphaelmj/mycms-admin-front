@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-6">
+    <h3>Mapa miniatura</h3>
+    <ng-container *ngIf="currentMapFiles.lessFile && !mapFiles?.lessFile && !clearedMaps.lessMap">
+      <img [src]="webUrl+currentMapFiles.lessFile" class="img-fluid d-block">
+    </ng-container>
+    <ng-container *ngIf="mapFiles?.lessFile">
+      <img [src]="webUrl+mapFiles?.lessFile" class="img-fluid d-block">
+    </ng-container>
+    <div>
+      <button mat-raised-button color="primary" type="button" (click)="addLessMap()">
+        <mat-icon>
+          image
+        </mat-icon>
+      </button>
+      <button *ngIf="(mapFiles?.lessFile && currentMapFiles.lessFile)  || (currentMapFiles.lessFile && clearedMaps.lessMap)" mat-raised-button type="button" (click)="mapFiles.lessFile=null;clearedMaps.lessMap=false;onChange()">
+        <mat-icon>
+          replay
+        </mat-icon>
+      </button>
+      <button mat-raised-button *ngIf="currentMapFiles.lessFile  && !clearedMaps.lessMap && !mapFiles.lessFile" color="warn" type="button" class="bt-remove-logo" (click)="clearLessMap()">
+        <mat-icon>
+          image_not_supported
+        </mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h3>Mapa do otwarcia w lightbox</h3>
+    <ng-container *ngIf="currentMapFiles?.moreFile?.src && !mapFiles?.moreFile?.src && !clearedMaps.moreMap">
+      <img [src]="webUrl+currentMapFiles.moreFile.src" class="img-fluid d-block">
+    </ng-container>
+    <ng-container *ngIf="mapFiles?.moreFile?.src">
+      <img [src]="webUrl+mapFiles?.moreFile?.src" class="img-fluid d-block">
+    </ng-container>
+    <div>
+      <button mat-raised-button color="primary" type="button" (click)="addMoreMap()">
+        <mat-icon>
+          image
+        </mat-icon>
+      </button>
+      <button *ngIf="(mapFiles?.moreFile?.src && currentMapFiles?.moreFile?.src) || (currentMapFiles?.moreFile?.src && clearedMaps.moreMap)" mat-raised-button type="button"
+              (click)="mapFiles.moreFile.src=null;mapFiles.moreFile.sizeString=null;clearedMaps.moreMap=false;onChange()">
+        <mat-icon>
+          replay
+        </mat-icon>
+      </button>
+      <button mat-raised-button *ngIf="currentMapFiles.moreFile && !clearedMaps.moreMap && !mapFiles?.moreFile?.src" color="warn" type="button" class="bt-remove-logo" (click)="clearMoreMap()">
+        <mat-icon>
+          image_not_supported
+        </mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

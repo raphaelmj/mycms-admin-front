@@ -1,0 +1,43 @@
+<form [formGroup]="formA">
+  <div class="row">
+    <div class="col-md-3 d-flex align-items-center justify-content-center">
+      <img [src]="webUrl+article.image"
+        *ngIf="article.image"
+        class="img-fluid">
+      <p class="text-muted"
+        *ngIf="!article.image">
+        Bez obrazka
+      </p>
+    </div>
+    <div class="col-md-3">
+      <h2>{{article.title}}</h2>
+      <ng-container *ngIf="article.category">
+        <span class="badge bg-danger">
+          {{article.category.name}}
+        </span>
+      </ng-container>
+    </div>
+    <div class="col-md-3">
+      <span class="fst-italic">
+        {{article.publishedAt| date:'dd.MM.yyyy H:mm:ss'}}
+      </span>
+    </div>
+    <div class="col-md-3 d-flex flex-column justify-content-between">
+      <mat-slide-toggle formControlName="status">opublikowany</mat-slide-toggle>
+      <div>
+        <button mat-raised-button
+          type="button"
+          color="primary"
+          (click)="edit()">Edytuj</button>
+        <button mat-raised-button
+          type="button" class="ms-1"
+          color="warn"
+          (click)="delete()">Usuń</button>
+      </div>
+
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+</form>

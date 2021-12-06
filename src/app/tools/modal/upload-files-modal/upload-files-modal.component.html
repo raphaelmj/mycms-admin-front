@@ -1,0 +1,24 @@
+<div class="overshadow"
+     (click)="closeEdit()">
+</div>
+
+<div class="edit-area">
+
+
+  <div class="close-btn"
+       (click)="closeEdit()">
+    <span class="material-icons">
+      close
+    </span></div>
+
+  <div class="scroll-inside">
+
+    <div class="container-fluid position-static">
+
+      <app-drop-files-simple [folder]="config.folder" [uploadType]="config.uploadType" (onUpload)="onUpload($event)"></app-drop-files-simple>
+
+    </div>
+
+  </div>
+
+</div>

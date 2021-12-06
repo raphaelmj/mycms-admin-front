@@ -1,0 +1,13 @@
+<app-nav-menu *ngIf="isLogin$ | async"></app-nav-menu>
+<section class="content"
+  [ngClass]="{'after-login': isLogin$ | async}">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</section>
+<app-loading-progress></app-loading-progress>
+<ng-template #modalTemplate></ng-template>

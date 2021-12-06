@@ -1,0 +1,28 @@
+<div class="row"  id="sortC">
+  <div class="col-md-12 slide-element" *ngFor="let slide of slides;let i = index">
+    <img [src]="webUrl+slide.slide" class="img-fluid">
+    <div class="slide-logo" *ngIf="slide.logo">
+      <img [src]="webUrl+slide.logo" class="img-fluid">
+      <button mat-raised-button color="warn" type="button" class="bt-remove-logo" (click)="removeLogo(i)">
+        <mat-icon>
+          image_not_supported
+        </mat-icon>
+      </button>
+    </div>
+    <button mat-raised-button color="warn" type="button" class="bt-remove" (click)="remove(i)">
+      <mat-icon>
+        remove
+      </mat-icon>
+    </button>
+    <button mat-raised-button color="primary" type="button" class="bt-add-logo" (click)="addLogo(i)">
+      <mat-icon>
+        satellite
+      </mat-icon> Logo na obrazku
+    </button>
+    <button mat-raised-button color="primary" type="button" class="bt-add-image" (click)="editSlide(i)">
+      <mat-icon>
+        image
+      </mat-icon> Slajd
+    </button>
+  </div>
+</div>

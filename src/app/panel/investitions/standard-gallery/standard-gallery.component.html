@@ -1,0 +1,67 @@
+<div class="overshadow"
+     (click)="closeEdit()">
+</div>
+
+<div class="edit-area">
+
+
+  <div class="close-btn"
+       (click)="closeEdit()">
+    <span class="material-icons">
+      close
+    </span></div>
+
+  <div class="scroll-inside">
+
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Obrazki</h4>
+          <app-drop-files (emitImage)="onImageAdd($event)"></app-drop-files>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-md-12">
+          <app-youtube-add (onAdd)="addMovie($event)"></app-youtube-add>
+        </div>
+      </div>
+
+
+      <div class="row" id="sortStandard">
+        <div class="col-md-3 position-relative mb-4" *ngFor="let ge of galleryElements;let i = index">
+          <ng-container *ngIf="ge.type == 'image'">
+            <img [src]="webUrl+ge.thumb" class="img-fluid" *ngIf="ge.thumb">
+            <img [src]="webUrl+ge.src" class="img-fluid" *ngIf="!ge.thumb">
+          </ng-container>
+          <ng-container *ngIf="ge.type == 'movie'">
+            <img [src]="webUrl+ge.src" class="img-fluid">
+            <div class="icon-movie position-absolute d-flex w-100 h-100 align-items-center justify-content-center">
+              <mat-icon>movie</mat-icon>
+            </div>
+          </ng-container>
+          <button mat-raised-button
+                  type="button"
+                  color="warn"
+                  (click)="removeElement(i)"
+          >
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <button
+                  class="btn btn-lg btn-primary btn-save" (click)="updateGallery()">
+            Zachowaj zmiany i zamknij
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

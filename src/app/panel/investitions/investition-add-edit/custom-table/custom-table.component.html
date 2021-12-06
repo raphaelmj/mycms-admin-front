@@ -1,0 +1,96 @@
+<div class="overshadow"
+     (click)="closeEdit()">
+</div>
+
+<div class="edit-area">
+  <div class="close-btn"
+       (click)="closeEdit()">
+    <span class="material-icons">
+      close
+    </span></div>
+
+  <div class="scroll-inside">
+
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-md-12">
+          <button mat-raised-button color="primary" type="button" (click)="addElement()">
+            <mat-icon>add</mat-icon> Dodaj na końcu
+          </button>
+          <button mat-raised-button color="primary" type="button" (click)="addElementUnshift()">
+            <mat-icon>add</mat-icon> Dodaj na początku
+          </button>
+          <button mat-raised-button color="primary" type="button" (click)="changeOrder()">
+            <mat-icon>reorder</mat-icon>  Kolejność
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+
+      <form [formGroup]="form" (submit)="save()">
+        <div class="row pb-5" formArrayName="customTable">
+          <div class="col-md-6 border border-secondary pt-4 pb-4" *ngFor="let ct of customTable;let i = index">
+
+            <div class="row">
+              <div class="col-md-10">
+                <ng-container [formGroupName]="i">
+                  <mat-form-field class="w-100 d-block">
+                    <input matInput
+                           placeholder="Budynek"
+                           formControlName="building">
+                  </mat-form-field>
+                  <mat-form-field class="w-100 d-block">
+                    <input matInput
+                           placeholder="Nazwa"
+                           formControlName="localName">
+                  </mat-form-field>
+                  <ng-container formGroupName="state">
+                    <mat-form-field>
+                      <mat-label>Status</mat-label>
+                      <mat-select formControlName="stateName">
+                        <mat-option *ngFor="let s of states" [value]="s">
+                          {{s}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="w-100 d-block">
+                      <input matInput
+                             placeholder="Nazwa najemcy"
+                             formControlName="firm">
+                    </mat-form-field>
+                  </ng-container>
+                  <mat-form-field class="w-100 d-block">
+                    <input matInput
+                           placeholder="Powierzchnia (m2)"
+                           formControlName="area">
+                  </mat-form-field>
+                </ng-container>
+                <app-info-assets [infoAssets]="ct.infoAssets" [index]="i"></app-info-assets>
+              </div>
+              <div class="col-md-2">
+                <button mat-raised-button color="warn" type="button" (click)="remove(i)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-primary btn-lg btn-save" (click)="save()">
+              Zachowaj
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

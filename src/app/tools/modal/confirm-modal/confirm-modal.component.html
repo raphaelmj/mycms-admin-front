@@ -1,0 +1,27 @@
+<div class="modal-body d-flex flex-column" #modalBody>
+    <button type="button" class="btn btn-close" (click)="close()">
+    </button>
+    <div class="modal-body--content w-100 mt-5">
+
+        <h4 class="mb-5 text-center fs-5">{{config?.message}}</h4>
+        <div class="modal-btns w-100 d-flex flex-row  justify-content-center">
+            <button
+                type="button"
+                (click)="choose(false)"
+                class="btn btn-danger w-100"
+            >
+                {{noText}}
+            </button>
+          <button
+            type="button"
+            (click)="choose(true)"
+            class="btn btn-success w-100"
+          >
+            {{yesText}}
+          </button>
+        </div>
+    </div>
+</div>
+<div class="overlayer" (click)="close()"></div>
+
+

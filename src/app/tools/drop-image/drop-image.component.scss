@@ -1,0 +1,16 @@
+.grid-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+
+  .col-image {
+    position: relative;
+
+    button {
+      position: absolute;
+      right: 5px;
+      bottom: 5px;
+      z-index: 99;
+    }
+  }
+}

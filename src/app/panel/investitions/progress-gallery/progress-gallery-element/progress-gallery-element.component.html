@@ -1,0 +1,33 @@
+<img [src]="webUrl+progressGalleryElement.imageThumb" class="img-fluid" *ngIf="progressGalleryElement.imageThumb">
+<ng-container *ngIf="!progressGalleryElement.imageThumb">
+  <span>Brak obrazka gallerii</span>
+</ng-container>
+<form [formGroup]="form">
+  <mat-form-field class="w-100 d-block">
+    <input matInput
+           placeholder="Nazwa"
+           formControlName="name">
+  </mat-form-field>
+</form>
+<button mat-raised-button color="primary" type="button" (click)="changeThumbImage()">
+  <mat-icon>
+    image
+  </mat-icon>
+</button>
+<button mat-raised-button color="primary" type="button" (click)="reThumb()" *ngIf="changed">
+  <mat-icon>
+    replay
+  </mat-icon>
+</button>
+<button mat-raised-button color="primary" type="button" (click)="showStandardGallery()">
+  <mat-icon>
+    edit
+  </mat-icon>
+</button>
+<button mat-raised-button color="warn" type="button" (click)="remove()">
+  <mat-icon>
+    remove
+  </mat-icon>
+</button>
+<hr>
+<ng-template #tempEdit></ng-template>

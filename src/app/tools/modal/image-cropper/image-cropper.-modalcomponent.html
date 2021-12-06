@@ -1,0 +1,55 @@
+<div class="overlayer"
+     (click)="close()"></div>
+<button type="button"
+        class="close-bt"
+        type="button"
+        (click)="close()">
+  <span class="material-icons">
+    close
+  </span>
+</button>
+<div class="pop-view">
+  <div class="drop"
+       appDnd
+       (fileDropped)="onFileDropped($event)">
+    <input type="file"
+           (change)="fileChangeEvent($event)" />
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <image-cropper [imageBase64]="base64$ | async"
+                     [imageChangedEvent]="imageChangedEvent"
+                     [maintainAspectRatio]="config.maintainAspectRatio"
+                     [aspectRatio]="config.width / config.height"
+                     [format]="config.format"
+                     [resizeToWidth]="config.resizeToWidth"
+                     (imageCropped)="imageCropped($event)"
+                     (imageLoaded)="imageLoaded($event)"
+                     (cropperReady)="cropperReady()"
+                     (loadImageFailed)="loadImageFailed()"></image-cropper>
+    </div>
+    <div class="col-6">
+      <img [src]="croppedImage"
+           class="img-fluid" />
+    </div>
+  </div>
+  <div class="set-row"
+       *ngIf="croppedImage">
+    <div class="row">
+      <div class="col-6">
+        <button mat-raised-button
+                type="button"
+                (click)="close()"
+                class="w-100">Anuluj</button>
+      </div>
+      <div class="col-6">
+        <button mat-raised-button
+                type="button"
+                color="primary"
+                (click)="addImage()"
+                class="w-100">Dodaj
+          obrazek</button>
+      </div>
+    </div>
+  </div>
+</div>

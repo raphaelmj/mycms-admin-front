@@ -1,0 +1,23 @@
+<ng-container [formGroup]="formArray">
+  <div class="row mb-3 pb-3 border-bottom">
+    <div class="col-md-12">
+      <button mat-raised-button color="primary" type="button" (click)="add()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row" *ngFor="let element of formArray.controls;let i = index">
+    <div class="col-md-10">
+      <mat-form-field class="w-100">
+        <input matInput
+               [placeholder]="placeholder"
+               [formControlName]="i">
+      </mat-form-field>
+    </div>
+    <div class="col-md-2">
+      <button mat-raised-button color="warn" type="button" class="w-100" (click)="removeElement(i)">
+        <mat-icon>remove</mat-icon>
+      </button>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,25 @@
+<form [formGroup]="form">
+    <div [ngClass]="activeClasses"
+         class="p-2"
+    >
+        <h3 class="fw-bold">{{popup.name}}</h3>
+        <img [src]="webUrl+popup?.popupData?.image?.path" class="img-fluid">
+        <div class="text-success d-flex align-items-center mb-2" *ngIf="popup.active">
+            <mat-icon>visibility</mat-icon>
+            <span>Widoczy</span>
+        </div>
+        <div class="mb-2">
+            <mat-slide-toggle formControlName="showEveryWhere">Pokaż wszędzie</mat-slide-toggle>
+        </div>
+        <div class="mb-2">
+            <mat-slide-toggle formControlName="status">Status</mat-slide-toggle>
+        </div>
+    </div>
+    <div class="mb-2" *ngIf="!asEvery">
+        <button mat-raised-button color="warn" class="w-100" (click)="unPin()">
+            <mat-icon>
+                push_pin
+            </mat-icon> Odepnij od strony
+        </button>
+    </div>
+</form>

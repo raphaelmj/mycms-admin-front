@@ -1,0 +1,42 @@
+<ng-container *ngIf="uploadType==='many'">
+  <ngfFormData [files]="files" [(FormData)]="formData" postName="files"></ngfFormData>
+  <div class="drop-area" ngfDrop selectable="1" multiple="1" [(files)]="files">
+    <span class="text-muted">Upuść pliki</span>
+  </div>
+  <button *ngIf="files" class="btn btn-warning d-block w-100" type="button" (click)="uploadFiles(files)">Wyślij pliki
+  </button>
+  <div class="row" *ngFor="let f of files;index as i">
+    <div class="col-md-10">
+      <h6 class="text-muted">{{f.name}}</h6>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-sm btn-danger" type="button" (click)="removeFileFromCollection(i)">
+        <mat-icon>
+          remove
+        </mat-icon>
+      </button>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="uploadType==='one'">
+  <ngfFormData [files]="files" [(FormData)]="formData" postName="file"></ngfFormData>
+  <div class="drop-area" ngfDrop selectable="1" [(file)]="files[0]">
+    <span class="text-muted">Upuść plik</span>
+  </div>
+  <ng-container *ngIf="files.length">
+    <div class="row">
+      <div class="col-md-10">
+        <h6 class="text-muted">{{files[0].name}}</h6>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-sm btn-danger" type="button" (click)="removeFileFirst()">
+          <mat-icon>
+            remove
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  <button *ngIf="files" class="btn btn-warning d-block w-100" type="button" (click)="uploadFile(files[0])">Wyślij pliki
+  </button>
+</ng-container>

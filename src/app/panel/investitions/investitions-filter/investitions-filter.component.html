@@ -1,0 +1,12 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-select formControlName="variant">
+      <mat-option [value]="0">
+        WSZYSTKIE
+      </mat-option>
+      <mat-option *ngFor="let v of variants" [value]="v.id">
+          {{v.name}} - {{v.path}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

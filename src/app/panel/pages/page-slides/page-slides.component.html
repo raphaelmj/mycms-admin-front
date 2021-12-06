@@ -1,0 +1,90 @@
+
+
+<div class="overshadow"
+     (click)="closeEdit()">
+
+</div>
+
+<div class="saving-over"
+     *ngIf="isSaving$| async">
+  <mat-spinner color="accent"></mat-spinner>
+</div>
+
+<div class="edit-area">
+
+
+  <div class="close-btn"
+       (click)="closeEdit()">
+    <span class="material-icons">
+      close
+    </span></div>
+
+  <div class="scroll-inside">
+
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-md-12 col-form">
+
+          <div class="row">
+            <div class="col-lg-4">
+              <ng-container *ngIf="!currentLogo && !croppedLogoImage">
+                Brak logo
+              </ng-container>
+              <img [src]="webUrl+currentLogo" *ngIf="currentLogo && currentLogo !== 'null' && !croppedLogoImage" class="img-fluid">
+              <img [src]="croppedLogoImage" *ngIf="croppedLogoImage" class="img-fluid">
+              <hr>
+              <button mat-raised-button color="primary" type="button" (click)="addImageLogo()">
+                <mat-icon>
+                  image
+                </mat-icon>
+              </button>
+              <button
+                  mat-raised-button
+                  color="accent"
+                  type="button"
+                  *ngIf="croppedLogoImage || noImage"
+                  (click)="croppedLogoImage=null;noImage=false;currentLogo = pageSlides.imageTitle"
+              >
+                <mat-icon>
+                  undo
+                </mat-icon>
+              </button>
+              <button
+                mat-raised-button
+                type="button"
+                *ngIf="croppedLogoImage || (currentLogo || currentLogo !== 'null')"
+                (click)="croppedLogoImage=null;currentLogo='null';noImage=true"
+              >
+                <mat-icon>
+                  clear
+                </mat-icon>
+              </button>
+              <hr>
+              <button mat-raised-button color="accent" type="button" class="w-100" (click)="saveImageLogo()">
+                Zapisz logo
+                <mat-icon>
+                  save
+                </mat-icon>
+              </button>
+            </div>
+            <div class="col-lg-8">
+              <button mat-raised-button color="accent" type="button" (click)="addSlide()">
+                Dodaj slide
+                <mat-icon>
+                  image
+                </mat-icon>
+              </button>
+              <hr>
+              <app-slides-creator [slides]="pageSlides.slideList" (onChange)="saveSlides($event)" [id]="page.id"></app-slides-creator>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<ng-template #tempImage></ng-template>

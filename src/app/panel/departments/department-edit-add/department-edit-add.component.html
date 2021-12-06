@@ -1,0 +1,107 @@
+<div class="overshadow"
+     (click)="closeEdit()">
+</div>
+
+<div class="saving-over"
+     *ngIf="isSaving$| async">
+  <mat-spinner color="accent"></mat-spinner>
+</div>
+
+<div class="edit-area">
+
+
+  <div class="close-btn"
+       (click)="closeEdit()">
+    <span class="material-icons">
+      close
+    </span></div>
+
+  <div class="scroll-inside">
+
+    <div class="container-fluid">
+
+      <form [formGroup]="form" (submit)="saveData()">
+
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <mat-form-field class="w-100">
+              <input matInput
+                     placeholder="Nazwa"
+                     formControlName="name">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="w-100">
+              <mat-label>Sposób prezentacji</mat-label>
+              <mat-select formControlName="viewType">
+                <mat-option *ngFor="let t of viewTypes" [value]="t">
+                  {{t | departmentTypeName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-slide-toggle formControlName="showOnPage">Pokaż na stronie kontaktu</mat-slide-toggle>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="w-100">
+            <input matInput
+                   placeholder="Meta Title"
+                   formControlName="metaTitle">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="w-100">
+              <textarea matInput placeholder="Meta Keywords" formControlName="metaKeywords"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="w-100">
+              <textarea matInput placeholder="Meta Description" formControlName="metaDescription"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-6">
+            <app-select-entities
+              model="office"
+              outputFormat="many"
+              [entityIds]="department.officesMap"
+              [nameKey]="'title'"
+              (onChange)="setOffices($event)"
+            >
+            </app-select-entities>
+          </div>
+          <div class="col-md-6">
+            <button mat-raised-button class="w-100" color="accent" type="button" (click)="contactsEdit()">
+              <mat-icon>
+                edit
+              </mat-icon>
+              Edytuj kontakty
+            </button>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <button mat-raised-button
+                    color="primary"
+                    class="btn-save">
+              Zapisz
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+<ng-template #tempEdit></ng-template>

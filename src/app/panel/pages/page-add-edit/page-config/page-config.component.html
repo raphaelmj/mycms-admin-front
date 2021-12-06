@@ -1,0 +1,54 @@
+<form [formGroup]="config">
+  <div class="row">
+    <div class="col-md-3" formGroupName="article">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Widok artykułu</mat-label>
+        <mat-select formControlName="presentation">
+          <mat-option *ngFor="let pt of articlePresentTypes" [value]="pt">
+            {{pt}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3" formGroupName="contact">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Widok kontaktu</mat-label>
+        <mat-select formControlName="presentation">
+          <mat-option *ngFor="let pt of contactPresentTypes" [value]="pt">
+            {{pt}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3"  formGroupName="department">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Widok działu</mat-label>
+        <mat-select formControlName="presentation">
+          <mat-option *ngFor="let pt of departmentPresentTypes" [value]="pt">
+            {{pt}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3" formGroupName="notices">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Widok ogłoszeń</mat-label>
+        <mat-select formControlName="presentation">
+          <mat-option *ngFor="let pt of noticePresentTypes" [value]="pt">
+            {{pt}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3" formGroupName="articles">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Widok artykułów</mat-label>
+        <mat-select formControlName="columns">
+          <mat-option *ngFor="let pt of columns" [value]="pt">
+            {{pt}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</form>

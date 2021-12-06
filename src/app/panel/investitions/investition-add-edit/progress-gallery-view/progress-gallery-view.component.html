@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-md-6 col-lg-4 mb-4" *ngFor="let pge of progressGalleries">
+    <img [src]="webUrl+pge.imageThumb" class="img-fluid" *ngIf="pge.imageThumb">
+    <ng-container *ngIf="!pge.imageThumb">
+      <span>Brak obrazka gallerii</span>
+    </ng-container>
+    <h2 class="mb-0">{{pge.name}}</h2>
+    <span>
+      Ilość obrazków: {{pge.images.length}}
+    </span>
+  </div>
+</div>

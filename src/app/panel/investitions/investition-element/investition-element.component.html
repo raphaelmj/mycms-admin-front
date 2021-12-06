@@ -1,0 +1,29 @@
+<div class="mb-2">
+  <div class="image position-relative">
+    <img [src]="webUrl+investition.listImage" class="img-fluid w-100">
+    <img *ngIf="investition.logo" [src]="webUrl+investition.logo" class="logo-image img-fluid">
+  </div>
+
+  <h2 class="fs-3">{{investition.name}}</h2>
+  <h3 class="fs-5">{{investition.city}}</h3>
+  <h4 class="fs-6">{{investition.address}}</h4>
+  <div class="row actions">
+    <div class="col-md-6">
+      <button mat-raised-button color="primary" type="button" (click)="edit()">
+        <mat-icon>
+          edit
+        </mat-icon>
+      </button>
+      <button mat-raised-button color="warn" class="ms-1" type="button" (click)="remove()">
+        <mat-icon>
+          delete
+        </mat-icon>
+      </button>
+    </div>
+    <div class="col-md-6">
+      <form [formGroup]="form">
+        <mat-slide-toggle formControlName="status">Publikacja</mat-slide-toggle>
+      </form>
+    </div>
+  </div>
+</div>

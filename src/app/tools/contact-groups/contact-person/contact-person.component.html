@@ -1,0 +1,29 @@
+<ng-container *ngIf="(contact$ | async) as contact">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="border-bottom">
+        {{contact.name}}
+      </div>
+      <div class="border-bottom">
+        {{contact.email}}
+      </div>
+      <div class="border-bottom">
+        {{contact.position}}
+      </div>
+      <div class="border-bottom mb-2">
+        <div *ngFor="let phone of contact.phones">
+          {{phone}}
+        </div>
+      </div>
+      <button mat-raised-button color="primary" type="button" (click)="changePerson()">
+        <mat-icon>manage_accounts</mat-icon> Zmień
+      </button>
+    </div>
+    <div class="col-md-2">
+      <button mat-raised-button color="warn" type="button" (click)="remove()">
+        <mat-icon>remove</mat-icon>
+      </button>
+    </div>
+  </div>
+
+</ng-container>

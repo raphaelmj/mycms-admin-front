@@ -1,0 +1,26 @@
+<div class="row mb-2 border-bottom">
+  <div class="col-md-7 d-flex align-items-center justify-content-between py-1">
+    <h3 class="m-0">{{page.title}}</h3>
+    <span class="badge bg-success ms-2">{{page.viewType | pageName}}</span>
+  </div>
+  <div class="col-md-5 d-flex flex-column">
+    <button mat-raised-button color="primary" (click)="startEdit()" class="w-100">
+      <mat-icon>
+        mode_edit
+      </mat-icon>
+      Edytuj
+    </button>
+    <button mat-raised-button color="primary" (click)="startEditSlides()" class="my-1 w-100">
+      <mat-icon>
+        collections
+      </mat-icon> Slajdy
+    </button>
+    <ng-container *ngIf="page.variants.length > 0">
+      <button mat-raised-button color="primary" (click)="changeVariantsOrder()" class="my-1 w-100">
+        <mat-icon>
+          reorder
+        </mat-icon> Kategorie inwestycji kolejność
+      </button>
+    </ng-container>
+  </div>
+</div>

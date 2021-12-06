@@ -1,0 +1,18 @@
+<h2>
+  {{contact.name}}
+</h2>
+<p class="text-primary">
+  {{contact.position}}
+</p>
+<div class="mt-2">
+  <button mat-raised-button color="primary" type="button" (click)="openEdit()">
+    <mat-icon>
+      edit
+    </mat-icon>
+  </button>
+  <button mat-raised-button color="warn" class="ms-1" type="button" (click)="delete()">
+    <mat-icon>
+      delete
+    </mat-icon>
+  </button>
+</div>

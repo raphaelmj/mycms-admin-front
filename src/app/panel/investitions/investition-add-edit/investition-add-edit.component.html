@@ -1,0 +1,535 @@
+<div class="overshadow"
+     (click)="closeEdit()">
+</div>
+
+<div class="saving-over"
+     *ngIf="isSaving$| async">
+  <mat-spinner color="accent"></mat-spinner>
+</div>
+
+<div class="edit-area">
+
+
+  <div class="close-btn"
+       (click)="closeEdit()">
+    <span class="material-icons">
+      close
+    </span></div>
+
+  <div class="scroll-inside">
+
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-md-12 col-form">
+
+          <form [formGroup]="formI"
+                (submit)="saveData()">
+
+            <div class="row">
+              <div class="col-md-3">
+                <h2>Obrazek na wprowadzenia</h2>
+                <app-investition-list-image
+                  [listImage]="investition.listImage"
+                  [croppedImage]="croppedImageList"
+                  [labelColor]="formI.get('labelColor').value?.rgba"
+                  [district]="formI.get('district').value"
+                >
+                </app-investition-list-image>
+                <div>
+                  <button mat-raised-button color="primary" type="button" (click)="addListImage()">
+                    <mat-icon>
+                      image
+                    </mat-icon>
+                  </button>
+                  <button *ngIf="investition.listImage && croppedImageList" mat-raised-button color="accent" type="button" (click)="croppedImageList = null">
+                    <mat-icon>
+                      replay
+                    </mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <h2>Logo</h2>
+                <img *ngIf="investition.logo && !croppedImageLogo" [src]="webUrl+investition.logo" class="img-fluid d-block">
+                <img *ngIf="croppedImageLogo" [src]="croppedImageLogo" class="img-fluid d-block">
+                <div>
+                  <button mat-raised-button color="primary" type="button" (click)="addLogoImage()">
+                    <mat-icon>
+                      image
+                    </mat-icon>
+                  </button>
+                  <button *ngIf="investition.logo && croppedImageLogo" mat-raised-button color="accent" type="button" (click)="croppedImageLogo = null">
+                    <mat-icon>
+                      replay
+                    </mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <h2>Obrazek główny</h2>
+                <img *ngIf="investition.fullImage && !croppedImageFull" [src]="webUrl+investition.fullImage" class="img-fluid d-block">
+                <img *ngIf="croppedImageFull" [src]="croppedImageFull" class="img-fluid d-block">
+                <div>
+                  <button mat-raised-button color="primary" type="button" (click)="addFullImage()">
+                    <mat-icon>
+                      image
+                    </mat-icon>
+                  </button>
+                  <button *ngIf="investition.fullImage && croppedImageFull" mat-raised-button color="accent" type="button" (click)="croppedImageFull = null">
+                    <mat-icon>
+                      replay
+                    </mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <hr>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Nazwa"
+                         formControlName="name">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Lokalizacja"
+                         formControlName="location">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Miejscowość"
+                         formControlName="city">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <textarea matInput placeholder="Adres" formControlName="address"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <hr>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-3">
+                <mat-form-field class="w-100 d-block">
+                  <input matInput
+                         placeholder="Dzielnica / Miasto"
+                         formControlName="district">
+                </mat-form-field>
+                <mat-slide-toggle formControlName="showDistrictLabel">Pokaż label dzielnicy</mat-slide-toggle>
+                <mat-form-field class="d-block">
+                  <input matInput [ngxMatColorPicker]="picker" formControlName="labelColor">
+                  <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+                  <ngx-mat-color-picker #picker [touchUi]="touchUi" [color]="color"></ngx-mat-color-picker>
+                </mat-form-field>
+                <ng-container *ngIf="formI.get('labelColor').value">
+                  <div class="p-3 text-light" [ngStyle]="{backgroundColor: formI.get('labelColor').value.rgba}">
+                    {{formI.get('district').value}}
+                  </div>
+                </ng-container>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Powierzchnia najmu"
+                         formControlName="rentAreaSpace">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Powierzchnia całkowita"
+                         formControlName="areaSize">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Liczba miejsc parkingowych"
+                         formControlName="parking">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <hr>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Data otwarcia"
+                         formControlName="openDate">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Data renowacji"
+                         formControlName="remodeling">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Data zakupu"
+                         formControlName="buyDate">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Termin realizacji"
+                         formControlName="serviceLocalsCount">
+                </mat-form-field>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <hr>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Liczba budynków"
+                         formControlName="buildingsCount">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Liczba pięter"
+                         formControlName="floorCount">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Liczba mieszkań"
+                         formControlName="flatCount">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Powierzchnia lokali"
+                         formControlName="flatsAreas">
+                </mat-form-field>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Liczba miejsc garażowych"
+                         formControlName="garageCount">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Liczba lokali użytkowych"
+                         formControlName="serviceLocalsCount">
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field class="w-100">
+                  <textarea matInput placeholder="Główni najemcy" formControlName="rentiers"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <hr>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Status budowy"
+                         formControlName="workState">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-slide-toggle formControlName="status">Publikacja</mat-slide-toggle>
+              </div>
+              <div class="col-md-3">
+                <mat-slide-toggle formControlName="status">Pokaż link do zewnętrzenj strony</mat-slide-toggle>
+              </div>
+              <div class="col-md-3">
+                <ng-container formGroupName="link">
+                  <mat-form-field class="w-100">
+                    <input matInput
+                           placeholder="Link"
+                           formControlName="link">
+                  </mat-form-field>
+                  <mat-form-field class="w-100">
+                    <input matInput
+                           placeholder="Nazwa linku"
+                           formControlName="name">
+                  </mat-form-field>
+                </ng-container>
+                <mat-slide-toggle formControlName="showWebsite">Pokaż link do strony</mat-slide-toggle>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <hr>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Text lewa kolumna</h4>
+                <ckeditor formControlName="textLeft" [config]="ckConfig"></ckeditor>
+              </div>
+              <div class="col-md-6">
+                <h4>Text prawa kolumna</h4>
+                <ckeditor formControlName="textRight" [config]="ckConfig"></ckeditor>
+              </div>
+            </div>
+
+            <div class="row mt-5">
+              <div class="col-md-12">
+                <mat-form-field appearance="fill" class="w-100">
+                  <mat-label>Typ galerii</mat-label>
+                  <mat-select formControlName="galleryType">
+                    <mat-option *ngFor="let t of galleryTypes" [value]="t">
+                      {{t | galleryType}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row mb-5">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="d-flex flex-row align-items-center mb-5">
+                      <mat-icon class="text-success" *ngIf="formI.get('galleryType').value == galleryTypeEnum.standard">check_circle</mat-icon>
+                      <button
+                        mat-raised-button
+                        [color]="(formI.get('galleryType').value == galleryTypeEnum.standard)?'accent':''"
+                        type="button"
+                        class="w-100"
+                        [ngClass]="{'ms-2':formI.get('galleryType').value == galleryTypeEnum.standard}"
+                        (click)="showStandardGallery()"
+                      >
+                        <mat-icon>collections</mat-icon>
+                        Kolekcja zdjęć
+                      </button>
+                    </div>
+                    <app-gallery-view [galleryElements]="investition.gallery"></app-gallery-view>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="d-flex flex-row align-items-center mb-5">
+                      <mat-icon class="text-success" *ngIf="formI.get('galleryType').value == galleryTypeEnum.progress">check_circle</mat-icon>
+                      <button
+                        mat-raised-button
+                        [color]="(formI.get('galleryType').value == galleryTypeEnum.progress)?'accent':''"
+                        type="button"
+                        class="w-100"
+                        [ngClass]="{'ms-2':formI.get('galleryType').value == galleryTypeEnum.progress}"
+                        (click)="showProgressGallery()"
+                      >
+                        <mat-icon>collections</mat-icon>
+                        Galeria z budowy
+                      </button>
+                    </div>
+                    <app-progress-gallery-view [progressGalleries]="investition.progressGallery"></app-progress-gallery-view>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-6">
+
+                <img *ngIf="investition.mapFiles && !croppedLessMap" [src]="webUrl+investition.mapFiles?.lessFile" class="img-fluid d-block">
+                <img *ngIf="croppedLessMap" [src]="croppedLessMap" class="img-fluid d-block">
+                <div>
+                  <button mat-raised-button color="primary" type="button" (click)="addLessMap()">
+                    <mat-icon>
+                      image
+                    </mat-icon>
+                  </button>
+                  <button *ngIf="investition.fullImage && croppedLessMap" mat-raised-button color="accent" type="button" (click)="croppedLessMap = null">
+                    <mat-icon>
+                      replay
+                    </mat-icon>
+                  </button>
+                </div>
+
+              </div>
+              <div class="col-md-6">
+
+                <ng-container *ngIf="investition.mapFiles">
+                  <img *ngIf="investition.mapFiles.moreFile && !croppedMoreMap" [src]="webUrl+investition.mapFiles?.moreFile?.src" class="img-fluid d-block">
+                </ng-container>
+                <img *ngIf="croppedMoreMap" [src]="croppedMoreMap" class="img-fluid d-block">
+                <div>
+                  <button mat-raised-button color="primary" type="button" (click)="addMoreMap()">
+                    <mat-icon>
+                      image
+                    </mat-icon>
+                  </button>
+                  <button *ngIf="investition.fullImage && croppedMoreMap" mat-raised-button color="accent" type="button" (click)="croppedMoreMap = null">
+                    <mat-icon>
+                      replay
+                    </mat-icon>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <hr>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <button mat-raised-button class="w-100" color="accent" type="button" (click)="contactsEdit()">
+                  <mat-icon>
+                    edit
+                  </mat-icon> Edytuj kontakty
+                </button>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <hr>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <button mat-raised-button class="w-100" color="accent" type="button" (click)="customTableOpen()">
+                  <mat-icon>
+                    edit
+                  </mat-icon> Tabela dodatkowych informacji
+                </button>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <hr>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field class="w-100">
+                  <input matInput
+                         placeholder="Meta Title"
+                         formControlName="metaTitle">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field class="w-100">
+                  <textarea matInput placeholder="Meta Keywords" formControlName="metaKeywords"></textarea>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field class="w-100">
+                  <textarea matInput placeholder="Meta Description" formControlName="metaDescription"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <hr>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <app-select-entities
+                  model="variant"
+                  outputFormat="many"
+                  [entityIds]="variantIds$ | async"
+                  [nameKey]="'name'"
+                  [customKey]="'path'"
+                  (onChange)="onVariantsChange($event)"
+                >
+                </app-select-entities>
+              </div>
+              <div class="col-md-6">
+                <app-select-entities
+                  model="office"
+                  outputFormat="many"
+                  [entityIds]="officeIds$ | async"
+                  [nameKey]="'title'"
+                  (onChange)="onOfficesChange($event)"
+                >
+                </app-select-entities>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <button mat-raised-button
+                        color="primary"
+                        class="btn-save">
+                  Zapisz
+                </button>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<ng-template #tempEdit></ng-template>

@@ -1,0 +1,33 @@
+<h2>
+  {{message.name}}
+</h2>
+<p class="text-success fs-5 fst-italic" *ngIf="message.createdAt">
+  {{message.createdAt | date: 'dd.MM.Y HH:mm:ss'}}
+</p>
+<p class="text-primary" *ngIf="message.krs">
+  KRS: {{message.krs}}
+</p>
+<p class="text-primary" *ngIf="message.nip">
+  NIP: {{message.nip}}
+</p>
+<p class="text-primary" *ngIf="message.court">
+  SĄD REJESTROWY: {{message.court}}
+</p>
+<p class="text-primary" *ngIf="message.capital">
+  KAPITAŁ ZAKŁADOWY: {{message.capital}}
+</p>
+<p class="text-primary" *ngIf="message.place">
+  KAPITAŁ ZAKŁADOWY: <span [innerHTML]="message.place"></span>
+</p>
+<div class="mt-2">
+  <button mat-raised-button color="primary" type="button" (click)="openEdit()">
+    <mat-icon>
+      edit
+    </mat-icon>
+  </button>
+  <button mat-raised-button color="warn" class="ms-1" type="button" (click)="delete()">
+    <mat-icon>
+      delete
+    </mat-icon>
+  </button>
+</div>

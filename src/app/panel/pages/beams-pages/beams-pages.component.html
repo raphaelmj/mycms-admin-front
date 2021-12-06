@@ -1,0 +1,59 @@
+<div class="overshadow"
+     (click)="closeEdit()">
+</div>
+
+<div class="saving-over"
+     *ngIf="isSaving$| async">
+  <mat-spinner color="accent"></mat-spinner>
+</div>
+
+
+<div class="edit-area">
+
+
+  <div class="close-btn"
+       (click)="closeEdit()">
+    <span class="material-icons">
+      close
+    </span></div>
+
+  <div class="scroll-inside">
+
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-md-12">
+
+          <ng-container *ngFor="let position of positions;let i = index">
+            <div class="row">
+              <div class="col-md-4">
+                <h2>{{position.name}}</h2>
+              </div>
+              <div class="col-md-8">
+                <app-select-entities
+                  model="page"
+                  outputFormat="many"
+                  [entityIds]="position.pages"
+                  [nameKey]="'title'"
+                  (onChange)="setPages($event,position)"
+                >
+                </app-select-entities>
+                <hr>
+                <button mat-raised-button color="primary" class="my-1 w-100" (click)="startSave(position)">
+                  <mat-icon>
+                    save
+                  </mat-icon> Zapisz
+                </button>
+              </div>
+            </div>
+          </ng-container>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<ng-template #temp></ng-template>

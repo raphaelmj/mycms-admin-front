@@ -1,0 +1,184 @@
+<div class="overshadow"
+     (click)="closeEdit()">
+</div>
+
+<div class="edit-area">
+
+
+  <div class="close-btn"
+       (click)="closeEdit()">
+    <span class="material-icons">
+      close
+    </span></div>
+
+  <div class="scroll-inside">
+
+    <div class="container-fluid">
+
+      <form [formGroup]="form" (submit)="save()">
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <mat-form-field class="w-100">
+              <input matInput
+                     placeholder="Nazwa"
+                     formControlName="name">
+            </mat-form-field>
+            <div class="text-primary">
+              {{variant.path}}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="w-100">
+              <textarea matInput
+                     placeholder="Nazwa"
+                        formControlName="linkName"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row mb-5">
+          <div class="col-md-6">
+            <h4>Text lewa kolumna</h4>
+            <ckeditor formControlName="leftDescription" [config]="ckConfig"></ckeditor>
+          </div>
+          <div class="col-md-6">
+            <h4>Text prawa kolumna</h4>
+            <ckeditor formControlName="rightDescription" [config]="ckConfig"></ckeditor>
+          </div>
+        </div>
+
+        <div class="row mb-5">
+          <div class="col-md-6">
+            <img [src]="webUrl+variant.banner" *ngIf="variant.banner && !croppedImage" class="img-fluid">
+            <img [src]="croppedImage" *ngIf="croppedImage" class="img-fluid">
+            <div>
+              <button mat-raised-button color="primary" type="button" (click)="addBanner()">
+                <mat-icon>
+                  image
+                </mat-icon>
+              </button>
+              <button *ngIf="variant.banner && croppedImage" mat-raised-button color="accent" type="button" (click)="croppedImage = null">
+                <mat-icon>
+                  replay
+                </mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <ng-container formGroupName="link">
+              <mat-form-field class="w-100">
+                <input matInput
+                       placeholder="Link"
+                       formControlName="link">
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <input matInput
+                       placeholder="Nazwa linku"
+                       formControlName="name">
+              </mat-form-field>
+            </ng-container>
+            <ng-container formGroupName="params">
+              <mat-slide-toggle formControlName="showLink">Pokaż link</mat-slide-toggle>
+              <br>
+              <mat-slide-toggle formControlName="showDescriptions">Pokaż opis</mat-slide-toggle>
+              <br>
+              <mat-slide-toggle formControlName="showBanner">Pokaż banner</mat-slide-toggle>
+              <br>
+              <mat-form-field class="w-100">
+                <mat-label>Sposób prezentacji</mat-label>
+                <mat-select formControlName="presentation">
+                  <mat-option *ngFor="let t of presentationTypes" [value]="t">
+                    {{t}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-12">
+            <ng-container *ngFor="let c of colors">
+              <button
+                type="button"
+                class="color-btn"
+                [ngStyle]="{backgroundColor:'#'+c.rgb}"
+                [ngClass]="{'active-color': c.rgb == color?.rgb}"
+                (click)="color = c;variant.color = c"
+              >
+                {{c.rgb}}
+              </button>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="w-100">
+              <input matInput
+                     placeholder="Meta Title"
+                     formControlName="metaTitle">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="w-100">
+              <textarea matInput placeholder="Meta Keywords" formControlName="metaKeywords"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="w-100">
+              <textarea matInput placeholder="Meta Description" formControlName="metaDescription"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <button mat-raised-button color="primary" class="w-100" type="button" (click)="contactsEdit()">
+              <mat-icon>
+                edit
+              </mat-icon>
+              Edytuj kontakty
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Przypisane inwestycje</h2>
+            <app-select-entities
+                    model="investition"
+                    outputFormat="many"
+                    [entityIds]="variant.investitionsMap"
+                    [nameKey]="'name'"
+                    (onChange)="setInvest($event)"
+            >
+            </app-select-entities>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <button mat-raised-button
+                    color="primary"
+                    class="btn-save">
+              Zapisz
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+<ng-template #tempEdit></ng-template>

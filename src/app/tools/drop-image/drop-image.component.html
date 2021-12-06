@@ -1,0 +1,21 @@
+<app-drop-files (emitImage)="getImage($event)"></app-drop-files>
+<div class="row">
+  <div class="col-md-12">
+    <div class="grid-row"
+      id="sortImages">
+      <div class="col-image"
+        *ngFor="let item of gallery;let i=index">
+        <img [src]="webUrl+((item.thumb)?item.thumb:item.path)"
+          class="img-fluid">
+        <button type="button"
+          mat-raised-button
+          color="warn"
+          (click)="removeImage(i)">
+          <span class="material-icons">
+            delete_forever
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

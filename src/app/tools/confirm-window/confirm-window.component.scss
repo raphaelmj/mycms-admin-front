@@ -1,0 +1,35 @@
+.over-shadow {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 109;
+  background-color: rgba($color: #000000, $alpha: 0.6);
+}
+
+.confirm-window {
+  position: fixed;
+  left: 30%;
+  top: 30%;
+  width: 40%;
+  z-index: 110;
+
+  .inside-confirm {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 15px #777777;
+
+    .message-cont {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .btns-cont {
+      text-align: center;
+    }
+  }
+}

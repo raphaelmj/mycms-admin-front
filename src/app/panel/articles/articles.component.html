@@ -1,0 +1,35 @@
+<div class="nav-actions mb-2 border-bottom pb-1">
+  <div class="d-flex align-items-center">
+    <button mat-raised-button
+      type="button"
+      color="primary"
+      class="bt-action lg-action me-5"
+      (click)="addEdit()">
+      Dodaj
+      <span class="material-icons">
+        add
+      </span>
+    </button>
+    <app-phrase-search [pharse]="(aqp$ |async)?.phrase"
+      (emitPhrase)="changePhrase($event)"></app-phrase-search>
+  </div>
+</div>
+<div class="row pb-5 m-filters">
+  <div class="col-lg-12 col-xl-6"
+    *ngFor="let art of articles$ | async">
+    <app-article-row [article]="art"
+      (editEmit)="editOpen($event)"
+      (deleteEmit)="deleteStart($event)"></app-article-row>
+  </div>
+</div>
+<section class="pag-nav">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <app-pagination-async [data]="{current:(aqp$ |async).page,total:total$ |async}"
+          (emitChange)="changePag($event)"></app-pagination-async>
+      </div>
+    </div>
+  </div>
+</section>
+<ng-template #temp></ng-template>

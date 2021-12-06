@@ -1,0 +1,110 @@
+<div class="overshadow"
+     (click)="closeEdit()">
+</div>
+
+<div class="saving-over"
+     *ngIf="isSaving$| async">
+  <mat-spinner color="accent"></mat-spinner>
+</div>
+
+
+<div class="edit-area">
+
+
+  <div class="close-btn"
+       (click)="closeEdit()">
+    <span class="material-icons">
+      close
+    </span></div>
+
+  <div class="scroll-inside">
+
+    <div class="container-fluid pb-5">
+
+      <form [formGroup]="form" (submit)="saveData()">
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="w-100">
+              <input matInput
+                     placeholder="Nagłówek"
+                     formControlName="name">
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <input matInput
+                     placeholder="KRS"
+                     formControlName="krs">
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <input matInput
+                     placeholder="NIP"
+                     formControlName="nip">
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <input matInput
+                     placeholder="REGON"
+                     formControlName="regon">
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <textarea matInput
+                     placeholder="SĄD REJESTROWY"
+                     formControlName="court">
+              </textarea>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <input matInput
+                     placeholder="KAPITAŁ ZAKŁADOWY"
+                     formControlName="capital">
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <input matInput
+                     placeholder="SEDZIBA"
+                     formControlName="place">
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <input matInput
+                     [ngxMatDatetimePicker]="picker"
+                     placeholder="Data publikacji"
+                     formControlName="createdAt">
+              <mat-datepicker-toggle matSuffix
+                                     [for]="picker"></mat-datepicker-toggle>
+              <ngx-mat-datetime-picker #picker
+                                       [touchUi]="touchUi">
+              </ngx-mat-datetime-picker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <ckeditor formControlName="description" [config]="ckConfig"></ckeditor>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <app-linked-info-creator [formArray]="form.get('linkedInfo')"></app-linked-info-creator>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <button mat-raised-button
+                    color="primary"
+                    class="btn-save">
+              Zapisz
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+<ng-template #tempEdit></ng-template>

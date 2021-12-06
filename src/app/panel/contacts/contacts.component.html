@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-12">
+    <button mat-raised-button color="primary" type="button" (click)="addNew()">
+      <mat-icon>add</mat-icon> Dodaj
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <hr>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4 border p-4" *ngFor="let contact of contacts">
+    <app-contact-row [contact]="contact" (onEditStart)="editStart($event)" (onDelete)="onDelete($event)"></app-contact-row>
+  </div>
+</div>
+<ng-template #temp></ng-template>

@@ -1,0 +1,33 @@
+<form [formGroup]="form">
+    <div
+         class="p-2"
+    >
+        <h3 class="fw-bold">{{popup.name}}</h3>
+        <ng-container *ngIf="webUrl+popup?.popupData?.image">
+            <img [src]="webUrl+popup?.popupData?.image?.path" class="img-fluid">
+        </ng-container>
+
+        <div class="mb-2">
+            <mat-slide-toggle formControlName="showEveryWhere">Pokaż wszędzie</mat-slide-toggle>
+        </div>
+        <div class="mb-2">
+            <mat-slide-toggle formControlName="status">Status</mat-slide-toggle>
+        </div>
+        <div class="mb-2">
+            <button mat-raised-button
+                    type="button"
+                    color="primary"
+                    (click)="edit()"
+            >
+                <mat-icon>
+                    edit
+                </mat-icon>
+            </button>
+            <button mat-raised-button color="warn" class="ms-1" type="button" (click)="delete()">
+                <mat-icon>
+                    delete
+                </mat-icon>
+            </button>
+        </div>
+    </div>
+</form>

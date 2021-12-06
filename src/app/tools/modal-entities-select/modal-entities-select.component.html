@@ -1,0 +1,36 @@
+
+<div class="overshadow"
+     (click)="closeEdit()">
+</div>
+
+<div class="edit-area">
+
+
+  <div class="close-btn"
+       (click)="closeEdit()">
+    <span class="material-icons">
+      close
+    </span></div>
+
+  <div class="scroll-inside">
+
+    <div class="container-fluid position-static">
+
+      <app-select-entities
+        [model]="config.model"
+        [outputFormat]="config.outputFormat"
+        [entityIds]="config.entityIds"
+        [nameKey]="config.nameKey"
+        [customKey]="config.customKey"
+        [changeStrategy]="config.changeStrategy"
+        [withImage]="config.withImage"
+        (onChange)="onChangeData($event)"
+        (onManualClick)="onManualClick($event)"
+      >
+      </app-select-entities>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,92 @@
+<div class="loading-content" *ngIf="isLoading$| async">
+  <mat-spinner color="accent"></mat-spinner>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h3>{{model | modelName}}</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <ng-container *ngFor="let ent of entitiesAdded$ | async;let i = index">
+      <div class="d-flex justify-content-between border-bottom pt-1 pb-1">
+        <div>
+          <h4 class="mb-0">{{ent[nameKey]}}</h4>
+          <ng-container *ngIf="customKey">
+            <h5 class="mb-0">
+              <span class="text-primary">
+                {{ent[customKey]}}
+              </span>
+            </h5>
+          </ng-container>
+          <ng-container *ngIf="withImage">
+            <ng-container [ngSwitch]="model">
+              <ng-container  *ngSwitchCase="'popup'">
+                <img [src]="webUrl+ent['popupData']['image']['path']" class="img-fluid">
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+        <div>
+          <button mat-raised-button color="warn" type="button" (click)="remove(i)">
+            <mat-icon>
+              remove
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="searchForm">
+      <mat-form-field class="w-100">
+        <input matInput
+               placeholder="Szukaj"
+               formControlName="phrase">
+      </mat-form-field>
+    </form>
+  </div>
+</div>
+
+<div class="overflow-scroll scroll-view">
+  <ng-container *ngFor="let ent of entities$ | async">
+    <div class="d-flex justify-content-between border-bottom pt-1 pb-1">
+      <div>
+        <h4 class="mb-0">{{ent[nameKey]}}</h4>
+        <ng-container *ngIf="customKey">
+          <h5 class="mb-0">
+              <span class="text-primary">
+                {{ent[customKey]}}
+              </span>
+          </h5>
+        </ng-container>
+        <ng-container *ngIf="withImage">
+          <ng-container [ngSwitch]="model">
+            <ng-container  *ngSwitchCase="'popup'">
+
+              <img [src]="webUrl+ent['popupData']['image']['path']" class="img-fluid">
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" type="button" (click)="add(ent.id)">
+          <mat-icon>
+            add
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-container *ngIf="changeStrategy === 'manual'">
+  <hr>
+  <button mat-raised-button color="primary" class="w-100 set-btn" type="button" (click)="acceptChange()">
+    Dodaj
+  </button>
+</ng-container>

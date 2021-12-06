@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-12">
+    <button mat-raised-button color="primary" class="" (click)="editStaticMenu()">
+      <mat-icon>
+        reorder
+      </mat-icon> Edytuj statyczne menu
+    </button>
+  </div>
+</div>
+<div class="row pb-5 m-filters">
+  <div class="col-lg-8 col-xl-8">
+        <app-page-row
+          *ngFor="let page of pages$ | async"
+          [page]="page"
+          (edit)="showEdit($event)"
+          (editSlides)="showSlidesEdit($event)"
+          (editVrOrder)="variantOrder($event)"
+        ></app-page-row>
+  </div>
+  <div class="col-lg-4 col-xl-4">
+    <ng-template #tempRight></ng-template>
+  </div>
+</div>
+<ng-template #tempModal></ng-template>

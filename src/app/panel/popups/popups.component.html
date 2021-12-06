@@ -1,0 +1,35 @@
+
+<div class="row pb-5 m-filters">
+    <div class="col-lg-12 col-xl-12">
+        <mat-toolbar color="warn">Strony</mat-toolbar>
+        <app-routes-assocs [elements]="pages$ | async" model="page" nameKey="title" [everyWherePopups]="everyWherePopups$ | async"></app-routes-assocs>
+        <hr>
+        <mat-toolbar color="warn">Kategorie inwestycji</mat-toolbar>
+        <app-routes-assocs [elements]="variants$ | async" model="variant" nameKey="name" customKey="path" [everyWherePopups]="everyWherePopups$ | async"></app-routes-assocs>
+        <hr>
+        <mat-toolbar color="warn">Działy</mat-toolbar>
+        <app-routes-assocs [elements]="departments$ | async" model="department" nameKey="name" [everyWherePopups]="everyWherePopups$ | async"></app-routes-assocs>
+        <hr>
+        <mat-toolbar color="warn">Inwestycje</mat-toolbar>
+        <app-routes-assocs [elements]="investitions$ | async" model="investition" nameKey="name" customKey="address" [everyWherePopups]="everyWherePopups$ | async"></app-routes-assocs>
+    </div>
+    <div class="col-lg-12 col-xl-12">
+        <hr>
+        <h2>Dodawanie popupów</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <button mat-raised-button color="primary" class="" (click)="addPopup()">
+                    <mat-icon>
+                        edit
+                    </mat-icon> Dodaj popup
+                </button>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4" *ngFor="let popup of popups$ | async">
+                <app-popup-element [popup]="popup" (onEdit)="onEditStart($event)" (onDelete)="onDelete($event)"></app-popup-element>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #tempModal></ng-template>

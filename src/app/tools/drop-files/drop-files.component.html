@@ -1,0 +1,6 @@
+<ngx-file-drop dropZoneLabel="Upuść pliki do galerii" class="drop-area" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+  <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+    Upuść pliki lub&nbsp;
+    <button type="button"mat-raised-button color="default"  (click)="openFileSelector()">Wybierz pliki</button>
+  </ng-template>
+</ngx-file-drop>

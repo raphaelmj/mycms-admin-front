@@ -1,0 +1,83 @@
+
+<div class="overshadow"
+     (click)="closeEdit()">
+</div>
+
+<div class="edit-area">
+
+
+  <div class="close-btn"
+       (click)="closeEdit()">
+    <span class="material-icons">
+      close
+    </span></div>
+
+  <div class="scroll-inside">
+
+    <div class="container-fluid">
+
+      <form [formGroup]="form" (submit)="save()">
+        <div class="row">
+          <div class="col-md-12">
+            <button mat-raised-button color="primary" type="button" (click)="addSection()">
+              <mat-icon>add_circle</mat-icon> Dodaj sekcję kontaktu
+            </button>
+            <hr>
+          </div>
+        </div>
+        <ng-container formArrayName="contacts">
+          <div class="row mb-3 pb-2 border-bottom" *ngFor="let c of contactElements;let i = index">
+            <div class="col-md-10" [formGroupName]="i">
+              <mat-form-field class="w-100 d-block">
+                <input matInput
+                       placeholder="Nazwa sekcji kontaktu"
+                       formControlName="name">
+              </mat-form-field>
+              <div class="row">
+                <div class="col-md-12">
+                  <button mat-raised-button color="primary" type="button" (click)="addPerson(i)">
+                    <mat-icon>add_circle</mat-icon> Dodaj osobę
+                  </button>
+                </div>
+              </div>
+              <ng-container formArrayName="persons">
+                  <ng-container>
+                      <div class="row">
+                        <div class="col-md-6" *ngFor="let p of c.persons;let j = index">
+                          <ng-container [formGroupName]="j">
+                            <mat-form-field class="w-100 d-block">
+                              <input matInput
+                                     placeholder="Rola"
+                                     formControlName="customRole">
+                            </mat-form-field>
+                            <mat-slide-toggle formControlName="showForm">Pokaż formularz kontaktowy</mat-slide-toggle>
+                            <app-contact-person [person]="p" [sectionIndex]="i" [personIndex]="j" (onRemove)="removePerson($event)"></app-contact-person>
+                          </ng-container>
+                        </div>
+                      </div>
+                  </ng-container>
+              </ng-container>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button color="warn" type="button" class="w-100" (click)="removeSection(i)">
+                <mat-icon>remove</mat-icon>
+              </button>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-primary btn-lg btn-save">
+              Zmień
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

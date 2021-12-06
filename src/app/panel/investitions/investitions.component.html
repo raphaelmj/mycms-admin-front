@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-12">
+    <button mat-raised-button color="primary" type="button" (click)="addNew()">
+      <mat-icon>add</mat-icon> Dodaj
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <hr>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <app-investitions-filter [variants]="variants" [variantId]="variantId$ | async" (onChange)="changeQuery($event)"></app-investitions-filter>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3" *ngFor="let investition of investitions$ | async">
+    <app-investition-element [investition]="investition" (onChangeStatus)="changeStatus($event)" (onEdit)="edit($event)"></app-investition-element>
+  </div>
+</div>
+<ng-template #temp></ng-template>
